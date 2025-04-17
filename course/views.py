@@ -12,3 +12,10 @@ def subject_courses(request, slug):
         'subject': subject,
         'courses': courses,
     })
+
+def purchase_page(request):
+    return render(request, 'purchase.html')
+
+def purchase_course(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    return render(request, 'purchase.html', {'course': course})

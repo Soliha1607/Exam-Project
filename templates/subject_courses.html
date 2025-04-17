@@ -47,7 +47,7 @@
                 <p><strong>Students Enrolled:</strong> {{ course.students_count }}</p>
                 <p><strong>Rating:</strong> {{ course.rating }} / 5 ({{ course.review_count }} reviews)</p>
                 <h4 class="text-success">Price: ${{ course.price }}</h4>
-                <a href="#" class="btn btn-success btn-lg mt-3">Buy Now</a>
+                <a href="{% url 'purchase' %}" class="btn btn-success btn-lg mt-3">Buy Now</a>
             </div>
         </div>
         {% endfor %}
