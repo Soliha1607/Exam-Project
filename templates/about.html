@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>About - CodeCraft</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="{% static 'assets/img/favicon.ico' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #111827;
+            color: #f3f4f6;
+            font-family: 'Poppins', sans-serif;
+        }
+        .about-container {
+            background-color: #1f2937;
+            border-radius: 12px;
+            overflow: hidden;
+            padding: 30px;
+        }
+        .about-title {
+            color: #60a5fa;
+            font-size: 2.5rem;
+        }
+        .section-title {
+            color: #9333ea;
+            font-size: 1.75rem;
+            margin-top: 30px;
+        }
+        .about-text {
+            color: #9ca3af;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        .highlight {
+            color: #10b981;
+        }
+        .btn-custom {
+            background-color: #2563eb;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="container-fluid py-5 bg-gradient" style="background: linear-gradient(to right, #1e3a8a, #9333ea); margin-bottom: 90px;">
+    <div class="container text-white text-center">
+        <h1 class="display-4 text-uppercase fw-bold about-title">About CodeCraft</h1>
+        <div class="d-inline-flex mt-3">
+            <p class="m-0 text-uppercase"><a class="text-white" href="/">Home</a></p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">About</p>
+        </div>
+    </div>
+</div>
+
+<!-- About Content -->
+<div class="container py-5">
+    <div class="about-container">
+        <h2 class="section-title">CodeCraft Haqida</h2>
+        <p class="about-text">CodeCraft self study uchun ishlab chiqilgan platforma bo‘lib, foydalanuvchilarga backend development va graphic design bo‘yicha mustaqil o‘rganish imkonini beradi. Bu platforma foydalanuvchilarga o‘z bilimlarini rivojlantirish va amaliy tajriba orttirish imkoniyatini yaratadi.</p>
+
+        <h2 class="section-title">App Creatorlari</h2>
+        <p class="about-text">CodeCraft yaratish orzusi va maqsadi bilan yaratilgan. Ushbu platforma yaratuvchilari <span class="highlight">Soliha</span> va <span class="highlight">Oyposh</span>, ular ilgari backend development va graphic design sohalarida o‘z tajribalari orqali foydalanuvchilarga eng yaxshi o‘rganish tajribasini taqdim etishni xohlaydilar.</p>
+
+        <h2 class="section-title">Platformaning Kelajagi</h2>
+        <p class="about-text">Kelajakda CodeCraftni yanada kengaytirish, yangi kurslar va vositalar bilan boyitish, shuningdek, foydalanuvchilarning o‘zaro aloqalarini qo‘llab-quvvatlashni rejalashtiryapmiz.</p>
+
+        <h2 class="section-title">Qo‘llab-quvvatlash</h2>
+        <p class="about-text">Agar sizda savollar bo‘lsa yoki yordam kerak bo‘lsa, iltimos, biz bilan bog‘laning. Bizning jamoa doimo sizga yordam berishga tayyor.</p>
+        <div class="text-left">
+            <small class="d-block"><a href="mailto:oyposh4@gmail.com" class="text-white">oyposh4@gmail.com</a></small>
+            <small class="d-block"><a href="mailto:solihapahridinova@gmail.com" class="text-white">solihapahridinova@gmail.com</a></small>
+        </div>
+
+
+        <a href="/" class="btn btn-custom btn-lg mt-4 text-white">Go Back to Home</a>
+    </div>
+</div>
+
+<!-- Back to Top -->
+<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

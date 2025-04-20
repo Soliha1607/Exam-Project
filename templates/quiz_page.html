@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Quiz for {{ course.name }} - CodeCraft</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+
+<!-- Header -->
+<div class="container-fluid py-5 bg-gradient" style="background: linear-gradient(to right, #1e3a8a, #9333ea);">
+    <div class="container text-white text-center">
+        <h1 class="display-5 fw-bold">Quiz for {{ course.name }}</h1>
+        <p class="mt-2"><a href="/" class="text-white">Home</a> > <a href="{% url 'subject_courses' course.subject.id %}" class="text-white">{{ course.subject.name }}</a> > {{ course.name }} > Quiz</p>
+    </div>
+</div>
+
+<!-- Quiz Questions -->
+<div class="container py-5">
+    <h3>Answer the following questions:</h3>
+    <form method="post" action="{% url 'submit_quiz' course.id %}">
+        {% csrf_token %}
+        {% for quiz in quizzes %}
+            <div class="mb-3">
+                <label>{{ quiz.question }}</label><br>
+                <input type="radio" name="question_{{ quiz.id }}" value="1"> {{ quiz.option_1 }}<br>
+                <input type="radio" name="question_{{ quiz.id }}" value="2"> {{ quiz.option_2 }}<br>
+                <input type="radio" name="question_{{ quiz.id }}" value="3"> {{ quiz.option_3 }}<br>
+                <input type="radio" name="question_{{ quiz.id }}" value="4"> {{ quiz.option_4 }}<br>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-custom btn-lg mt-3">Submit Quiz</button>
+    </form>
+</div>
+
+</body>
+</html>

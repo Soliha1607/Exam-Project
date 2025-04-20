@@ -3,56 +3,79 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{{ subject.name }} Courses - ECOURSES</title>
+    <title>{{ subject.name }} Courses - CodeCraft</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <link href="{% static 'assets/img/favicon.ico' %}" rel="icon">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #111827;
+            color: #f3f4f6;
+            font-family: 'Poppins', sans-serif;
+        }
+        .course-card {
+            background-color: #1f2937;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        .course-card:hover {
+            transform: scale(1.02);
+        }
+        .course-title {
+            color: #60a5fa;
+        }
+        .course-meta {
+            color: #9ca3af;
+        }
+        .price {
+            color: #10b981;
+        }
+        .btn-custom {
+            background-color: #2563eb;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
 </head>
 <body>
 
 <!-- Header -->
-<div class="container-fluid page-header" style="margin-bottom: 90px;">
-    <div class="container">
-        <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-            <h3 class="display-4 text-white text-uppercase">{{ subject.name }}</h3>
-            <div class="d-inline-flex text-white">
-                <p class="m-0 text-uppercase"><a class="text-white" href="/">Home</a></p>
-                <i class="fa fa-angle-double-right pt-1 px-3"></i>
-                <p class="m-0 text-uppercase">{{ subject.name }}</p>
-            </div>
+<div class="container-fluid py-5 bg-gradient" style="background: linear-gradient(to right, #1e3a8a, #9333ea); margin-bottom: 90px;">
+    <div class="container text-white text-center">
+        <h1 class="display-4 text-uppercase fw-bold">{{ subject.name }}</h1>
+        <div class="d-inline-flex mt-3">
+            <p class="m-0 text-uppercase"><a class="text-white" href="/">Home</a></p>
+            <i class="fa fa-angle-double-right pt-1 px-3"></i>
+            <p class="m-0 text-uppercase">Courses</p>
         </div>
     </div>
 </div>
 
-<!-- Courses for Selected Subject -->
+<!-- Courses -->
 <div class="container py-5">
     {% if courses %}
         {% for course in courses %}
-        <div class="row mb-5 shadow p-4 rounded" style="background-color: #f8f9fa;">
-            <div class="col-md-6">
-                <iframe width="100%" height="315"
-                    src="https://www.youtube.com/embed/{{ course.video_id }}"
-                    title="{{ course.name }}"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
-            </div>
-            <div class="col-md-6">
-                <h2 class="text-primary">{{ course.name }}</h2>
-                <p><strong>Duration:</strong> {{ course.duration }}</p>
-                <p><strong>Students Enrolled:</strong> {{ course.students_count }}</p>
-                <p><strong>Rating:</strong> {{ course.rating }} / 5 ({{ course.review_count }} reviews)</p>
-                <h4 class="text-success">Price: ${{ course.price }}</h4>
-                <a href="{% url 'purchase' %}" class="btn btn-success btn-lg mt-3">Buy Now</a>
-            </div>
+        <div class="course-card shadow-lg">
+            <h3 class="course-title">{{ course.name }}</h3>
+            <p class="course-meta mb-2"><strong>🕒 Duration:</strong> {{ course.duration }}</p>
+            <p class="course-meta mb-2"><strong>👥 Students:</strong> {{ course.students_count }}</p>
+            <p class="course-meta mb-2"><strong>⭐ Rating:</strong> {{ course.rating }} / 5 ({{ course.review_count }} reviews)</p>
+            <h4 class="price mt-3">💰 ${{ course.price }}</h4>
+            <a href="{% url 'course_detail' course.id %}" class="btn btn-custom btn-lg mt-3 text-white">View Lesson</a>
         </div>
         {% endfor %}
     {% else %}
-        <p class="text-center">No courses available in this subject yet.</p>
+        <div class="text-center">
+            <p class="text-muted">No courses available in this subject yet.</p>
+        </div>
     {% endif %}
 </div>
 

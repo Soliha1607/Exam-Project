@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{{ course.name }} - CodeCraft</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link href="{% static 'assets/img/favicon.ico' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #e5e7eb;
+            font-family: 'Poppins', sans-serif;
+        }
+        .video-wrapper {
+            margin-bottom: 30px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+        .course-meta span {
+            display: block;
+            margin-bottom: 5px;
+            color: #9ca3af;
+        }
+        .section-title {
+            color: #38bdf8;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+        .module-card {
+            background-color: #1e293b;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .comment-box {
+            background-color: #1e293b;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .btn-custom {
+            background-color: #2563eb;
+            border: none;
+        }
+        .btn-custom:hover {
+            background-color: #1d4ed8;
+        }
+        .form-control {
+            background-color: #111827;
+            color: #f9fafb;
+            border: 1px solid #374151;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="container-fluid py-5 bg-gradient" style="background: linear-gradient(to right, #1e3a8a, #9333ea);">
+    <div class="container text-white text-center">
+        <h1 class="display-5 fw-bold">{{ course.name }}</h1>
+        <p class="mt-2"><a href="/" class="text-white">Home</a> > <a href="{% url 'subject_courses' course.subject.id %}" class="text-white">{{ course.subject.name }}</a> > {{ course.name }}</p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container py-5">
+    <!-- Video -->
+    <div class="video-wrapper mb-4">
+        <iframe width="100%" height="480"
+            src="https://www.youtube.com/embed/{{ course.video_id }}"
+            title="{{ course.name }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <!-- Course Info -->
+    <div class="mb-5">
+        <h3 class="section-title">Course Details</h3>
+        <div class="course-meta">
+            <span><strong>🕒 Duration:</strong> {{ course.duration }}</span>
+            <span><strong>👥 Students:</strong> {{ course.students_count }}</span>
+            <span><strong>⭐ Rating:</strong> {{ course.rating }} / 5 ({{ course.review_count }} reviews)</span>
+            <span><strong>💰 Price:</strong> ${{ course.price }}</span>
+        </div>
+    </div>
+
+    <!-- Modules -->
+    {% if course.modules.all %}
+    <div>
+        <h3 class="section-title">Modules</h3>
+        {% for module in course.modules.all %}
+        <div class="module-card">
+            <h5>{{ module.title }}</h5>
+            <p>Lessons: {{ module.lessons_count }} | Total Duration: {{ module.total_duration }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <!-- Comments -->
+    <div>
+        <h3 class="section-title">📝 Comments</h3>
+        {% if course.comments.all %}
+            {% for comment in course.comments.all %}
+            <div class="comment-box">
+                <strong>{{ comment.student.user.username }}</strong>
+                <span class="text-warning">Rating: {{ comment.rating }}⭐</span>
+                <p>{{ comment.text }}</p>
+                <small class="text-muted">{{ comment.created_at }}</small>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted">No comments yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Add Comment Form -->
+    {% if user.is_authenticated %}
+    <div class="mt-5">
+        <h4 class="text-info mb-3">Leave a Comment</h4>
+        <form method="post" action="{% url 'add_comment' course.id %}">
+            {% csrf_token %}
+            <div class="form-group mb-3">
+                <label for="id_text">Your Comment</label>
+                <textarea name="text" class="form-control" id="id_text" rows="3" required></textarea>
+            </div>
+            <div class="form-group mb-3">
+                <label for="id_rating">Rating (1-5)</label>
+                <input type="number" name="rating" class="form-control" id="id_rating" min="1" max="5" required>
+            </div>
+            <button type="submit" class="btn btn-custom">Submit</button>
+        </form>
+    </div>
+    {% else %}
+        <p class="text-muted mt-4">You must <a href="{% url 'login' %}">login</a> to comment.</p>
+    {% endif %}
+</div>
+
+    <!-- Quiz Button -->
+    {% if course.quiz %}
+        <a href="{% url 'quiz_page' course.id %}" class="btn btn-custom btn-lg mt-4">Start Quiz</a>
+    {% else %}
+        <p class="text-muted mt-3">No quiz available for this course yet.</p>
+    {% endif %}
+
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+</html>

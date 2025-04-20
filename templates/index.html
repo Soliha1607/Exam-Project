@@ -1,20 +1,16 @@
 {% load static %}
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>ECOURSES - Online Courses </title>
+    <title>CodeCraft</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
 
     <!-- Favicon -->
     <link href="{% static 'assets/img/favicon.ico' %}" rel="icon">
 
-    <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
@@ -23,48 +19,93 @@
     <!-- Libraries Stylesheet -->
     <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
 
-    <!-- Customized Bootstrap Stylesheet -->
+    <!-- Custom CSS -->
     <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for dark theme -->
+    <style>
+        body {
+            background-color: #000;
+            color: #fff;
+        }
+        .text-primary {
+            color: #0d6efd !important;
+        }
+        .bg-primary {
+            background-color: #0d6efd !important;
+        }
+        .bg-white {
+            background-color: #111 !important;
+        }
+        .bg-light {
+            background-color: #1a1a1a !important;
+        }
+        .text-muted {
+            color: #ccc !important;
+        }
+        .modal-content {
+            background-color: #111;
+            color: white;
+        }
+        .page-header {
+            background-color: #0d6efd !important;
+        }
+        .cat-item img {
+            filter: brightness(0.9);
+        }
+        .cat-overlay {
+            background-color: rgba(13, 110, 253, 0.8) !important;
+        }
+    </style>
 </head>
 
 <body>
-    <!-- Topbar Start -->
-    <div class="container-fluid d-none d-lg-block">
-        <div class="row align-items-center py-4 px-xl-5">
-            <div class="col-lg-3">
-                <a href="" class="text-decoration-none">
-                    <h1 class="m-0"><span class="text-primary">E</span>COURSES</h1>
-                </a>
-            </div>
-            <div class="col-lg-3 text-right">
-                <div class="d-inline-flex align-items-center">
-                    <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
-                    <div class="text-left">
-                        <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
-                        <small>Nowhere</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 text-right">
-                <div class="d-inline-flex align-items-center">
-                    <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
-                    <div class="text-left">
-                        <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
-                        <small>oyposh4@gmail.com</small>
-                    </div>
+
+<!-- Topbar Start -->
+<div class="container-fluid d-none d-lg-block bg-white shadow-sm">
+    <div class="row align-items-center py-4 px-xl-5">
+        <div class="col-lg-3">
+            <a href="/" class="text-decoration-none">
+                <h1 class="m-0"><span class="text-primary">CodeCraft</span></h1>
+            </a>
+        </div>
+        <div class="col-lg-3 text-right">
+            <div class="d-inline-flex align-items-center" style="cursor: pointer;" data-toggle="modal" data-target="#mapModal">
+                <i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>
+                <div class="text-left">
+                    <h6 class="font-weight-semi-bold mb-1">Our Office</h6>
+                    <small>Najot Ta'lim Xadra</small>
                 </div>
             </div>
         </div>
+        <div class="col-lg-3 text-right">
+            <div class="d-inline-flex align-items-center">
+                <i class="fa fa-2x fa-envelope text-primary mr-3"></i>
+                <div class="text-left">
+                    <h6 class="font-weight-semi-bold mb-1">Email Us</h6>
+                    <small class="d-block"><a href="mailto:oyposh4@gmail.com" class="text-white">oyposh4@gmail.com</a></small>
+                    <small class="d-block"><a href="mailto:solihapahridinova@gmail.com" class="text-white">solihapahridinova@gmail.com</a></small>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 text-right">
+            <div class="d-inline-flex align-items-center justify-content-end">
+                <a href="{% url 'login' %}" class="btn btn-outline-primary px-4">Login</a>
+            </div>
+        </div>
     </div>
-    <!-- Topbar End -->
+</div>
+<!-- Topbar End -->
 
 <!-- Header -->
-<div class="container-fluid page-header" style="margin-bottom: 90px;">
+<div class="container-fluid page-header text-white" style="margin-bottom: 90px;">
     <div class="container">
         <div class="d-flex flex-column justify-content-center" style="min-height: 300px">
-            <h3 class="display-4 text-white text-uppercase">Courses</h3>
-            <div class="d-inline-flex text-white">
+            <h3 class="display-4 text-uppercase">HOME</h3>
+            <div class="d-inline-flex">
                 <p class="m-0 text-uppercase"><a class="text-white" href="/">Home</a></p>
+                <i class="fa fa-angle-double-right pt-1 px-3"></i>
+                <p class="m-0 text-uppercase">About</p>
                 <i class="fa fa-angle-double-right pt-1 px-3"></i>
                 <p class="m-0 text-uppercase">Courses</p>
             </div>
@@ -72,35 +113,79 @@
     </div>
 </div>
 
-<!-- Category / Subject -->
-<div class="container-fluid py-5">
-    <div class="container pt-5 pb-3">
-        <div class="text-center mb-5">
-            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
-            <h1>Explore Top Subjects</h1>
-        </div>
-        <div class="row">
-            {% for subject in subjects %}
-            <div class="col-lg-3 col-md-6 mb-4">
-                <div class="cat-item position-relative overflow-hidden rounded mb-2">
-                    <img class="img-fluid" src="{{ subject.image.url }}" alt="">
-                    <a class="cat-overlay text-white text-decoration-none" href="{% url 'subject_courses' slug=subject.slug %}">
-                        <h4 class="text-white font-weight-medium">{{ subject.name }}</h4>
-                        <span>{{ subject.course_set.count }} Courses</span>
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
+<!-- About Link -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Welcome to CodeCraft</h5>
+        <h1 class="mb-4">Learn Backend Development and Graphic Design</h1>
+        <p class="text-muted mb-4">Explore our platform to find courses that will help you learn and grow in the field of development and design.</p>
+        <a href="{% url 'about' %}" class="btn btn-primary btn-lg">Learn More About Us</a>
     </div>
 </div>
 
+<!-- Subjects Section -->
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Subjects</h5>
+        <h1 class="mb-4">Explore Top Subjects</h1>
+    </div>
+  <div class="row">
+    {% for subject in subjects %}
+    <div class="col-lg-3 col-md-6 mb-4">
+        <div class="shadow-sm rounded bg-white overflow-hidden">
+            <img class="img-fluid" src="{{ subject.image.url }}" alt="">
+            <a class="d-block text-center p-3 text-decoration-none bg-light" href="{% url 'subject_courses' slug=subject.slug %}">
+                <h5 class="text-primary font-weight-medium mb-1">{{ subject.name }}</h5>
+                <span class="text-muted">{{ subject.course_set.count }} Courses</span><br>
+                <span class="text-warning">
+                    ⭐ {{ subject.avg_rating }} / 5.0
+                </span>
+            </a>
+        </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
 <!-- Back to Top -->
-<a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
+<a href="#" class="btn btn-primary btn-lg-square back-to-top shadow"><i class="fa fa-angle-double-up"></i></a>
 
 <!-- Scripts -->
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="{% static 'assets/js/main.js' %}"></script>
+
+<!-- Map Modal -->
+<div class="modal fade" id="mapModal" tabindex="-1" role="dialog" aria-labelledby="mapModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+    <div class="modal-content rounded">
+      <div class="modal-header">
+        <h5 class="modal-title" id="mapModalLabel">Our Office Location</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span style="font-size: 2rem;" aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <iframe
+            src="https://www.google.com/maps?q=Xadra+mavzesi+1,+Toshkent&output=embed"
+            width="100%" height="400" frameborder="0"
+            style="border:0; border-radius: 10px;"
+            allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>
+<!-- Footer Section -->
+<div class="footer bg-dark text-muted py-4 mt-5">
+    <div class="container text-center">
+        <p>App Created in 2025</p>
+        <p>Join our Telegram channel for updates: <a href="https://t.me/sa_li_khas" target="_blank" class="text-primary">Telegram Channel</a></p>
+        <p>Thank you for using our site!</p>
+    </div>
+</div>
+
 </html>
