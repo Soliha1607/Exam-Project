@@ -142,7 +142,12 @@
     {% else %}
         <p class="text-muted mt-4">You must <a href="{% url 'login' %}">login</a> to comment.</p>
     {% endif %}
-</div>
+
+    <form method="POST" action="{% url 'join_course' course.id %}">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-success">Join this Course</button>
+    </form>
+
 
     <!-- Quiz Button -->
     {% if course.quiz %}
@@ -150,6 +155,7 @@
     {% else %}
         <p class="text-muted mt-3">No quiz available for this course yet.</p>
     {% endif %}
+</div>
 
 
 <!-- Scripts -->

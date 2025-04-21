@@ -89,8 +89,13 @@
             </div>
         </div>
         <div class="col-lg-3 text-right">
-            <div class="d-inline-flex align-items-center justify-content-end">
-                <a href="{% url 'login' %}" class="btn btn-outline-primary px-4">Login</a>
+            <div class="d-inline-flex align-items-center">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'student_detail' %}" class="btn btn-outline-primary px-4">Profile</a>
+                    <a href="{% url 'logout' %}" class="btn btn-outline-primary px-4 ml-2">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-primary px-4">Login</a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -121,6 +126,24 @@
         <p class="text-muted mb-4">Explore our platform to find courses that will help you learn and grow in the field of development and design.</p>
         <a href="{% url 'about' %}" class="btn btn-primary btn-lg">Learn More About Us</a>
     </div>
+</div>
+
+<!-- Student Info Section (if logged in) -->
+<div class="container py-5">
+    {% if student %}
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Welcome Back, {{ student.user.username }}</h5>
+            <h4>Your Profile</h4>
+            <p class="text-muted mb-4">Email: {{ student.user.email }}</p>
+            <p class="text-muted mb-4">You are enrolled in {{ student.registered_courses.count }} courses.</p>
+        </div>
+    {% else %}
+        <div class="text-center mb-5">
+            <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Welcome to CodeCraft</h5>
+            <h1 class="mb-4">Sign in to View Your Profile</h1>
+            <p class="text-muted mb-4">Log in to see your enrolled courses and more.</p>
+        </div>
+    {% endif %}
 </div>
 
 <!-- Subjects Section -->

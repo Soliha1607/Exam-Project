@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+</head>
+<body style="background-color: #000; color: white;">
+    <div class="container py-5">
+        <h1 class="text-primary mb-4">Edit Profile</h1>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Bio:</label>
+                <textarea name="bio" class="form-control bg-dark text-white">{{ student.bio }}</textarea>
+            </div>
+            <div class="form-group">
+                <label>Favorite Subject:</label>
+                <select name="favorite_subject" class="form-control bg-dark text-white">
+                    <option value="">-- Select --</option>
+                    {% for subject in subjects %}
+                        <option value="{{ subject.id }}" {% if student.favorite_subject == subject %}selected{% endif %}>
+                            {{ subject.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Change Avatar:</label><br>
+                {% if student.avatar %}
+                    <img src="{{ student.avatar.url }}" width="100" height="100" class="rounded mb-2"><br>
+                {% endif %}
+                <input type="file" name="avatar" class="form-control-file text-white">
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
+            <a href="{% url 'student_detail' %}" class="btn btn-secondary mt-3">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>

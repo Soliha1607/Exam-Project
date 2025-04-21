@@ -18,8 +18,7 @@ class CourseAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('user',)
-    search_fields = ('user__username',)
+    list_display = ('user', 'favorite_subject')
 
 
 @admin.register(Module)

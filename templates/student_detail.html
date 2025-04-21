@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+</head>
+<body style="background-color: #000; color: white;">
+
+    <div class="container py-5">
+        <!-- Go Back Home Button -->
+        <a href="{% url 'index' %}" class="btn btn-outline-primary mb-4">Go Back Home</a>
+
+        <h1 class="text-primary mb-4">Student Profile</h1>
+
+        <div class="profile-container bg-dark p-4 rounded shadow">
+            <!-- Avatar Image -->
+            <div class="profile-avatar text-center">
+                {% if student.avatar %}
+                    <img src="{{ student.avatar.url }}" class="rounded-circle mb-3" width="120" height="120" alt="Avatar">
+                {% else %}
+                    <img src="{% static 'assets/img/default-avatar.png' %}" class="rounded-circle mb-3" width="120" height="120" alt="Default Avatar">
+                {% endif %}
+            </div>
+
+            <!-- Student Details -->
+            <div class="profile-details mb-3">
+                <p><strong>Username:</strong> {{ student.user.username }}</p>
+                <p><strong>Email:</strong> {{ student.user.email }}</p>
+                <p><strong>Full Name:</strong> {{ student.user.first_name }} {{ student.user.last_name }}</p>
+                <p><strong>Bio:</strong> {{ student.bio|default:"No bio yet." }}</p>
+                <p><strong>Favorite Subject:</strong> {{ student.favorite_subject.name|default:"Not selected" }}</p>
+            </div>
+
+            <!-- Registered Courses -->
+            <div class="registered-courses mb-3">
+                <p><strong>Registered Courses:</strong></p>
+                <ul>
+                    {% for course in student.registered_courses.all %}
+                        <li>{{ course.title }}</li>
+                    {% empty %}
+                        <li>No courses yet.</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <!-- Joined Date -->
+            <div class="join-date mb-3">
+                <p><strong>Joined:</strong> {{ student.user.date_joined|date:"F j, Y" }}</p>
+            </div>
+
+            <!-- Links to edit profile or view courses -->
+            <div class="profile-actions d-flex justify-content-between mt-3">
+                <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary">Edit Profile</a>
+                <a href="{% url 'my_courses' %}" class="btn btn-outline-primary">My Courses</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
